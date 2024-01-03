@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { HomeStyled } from './HomeStyled';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [films, setFilms] = useState([]);
   useEffect(() => {
     const fetchFilms = async () => {
@@ -25,3 +25,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;

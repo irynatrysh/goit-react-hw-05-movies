@@ -37,7 +37,7 @@ export const Titlediv = styled('div')`
   align-items: center;
   justify-content: center;
 
-  background-color: indigo;
+  background-color: #273563;
 `;
 export const ImgDiv = styled('div')`
   width: 100%;

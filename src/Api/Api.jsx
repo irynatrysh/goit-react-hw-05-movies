@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const apiKey = '12c32cf6e2f1b9ee11784c9e34961f238';
+const apiKey = '2c32cf6e2f1b9ee11784c9e34961f238';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+axios.defaults.params = {
+  api_key: apiKey
+}
 
 export const getTrending = async () => {
   try {
-    const { data } = await axios.get(`/trending/all/day?api_key=${apiKey}`);
+    const { data } = await axios.get(`/trending/all/day`);
     return data;
   } catch (error) {
     console.error('Error fetching trending movies', error);
@@ -16,7 +19,7 @@ export const getTrending = async () => {
 export const searchFilm = async query => {
   try {
     const { data } = await axios.get(
-      `/search/movie?api_key=${apiKey}&language=en-US&query=${query}`
+      `/search/movie?language=en-US&query=${query}`
     );
     return data;
   } catch (error) {
@@ -28,7 +31,7 @@ export const searchFilm = async query => {
 export const getFilm = async id => {
   try {
     const { data } = await axios.get(
-      `movie/${id}?api_key=${apiKey}&language=en-US`
+      `movie/${id}?language=en-US`
     );
     return data;
   } catch (error) {
@@ -40,7 +43,7 @@ export const getFilm = async id => {
 export const getCasts = async id => {
   try {
     const { data } = await axios.get(
-      `movie/${id}/credits?api_key=${apiKey}&language=en-US`
+      `movie/${id}/credits?language=en-US`
     );
     console.log('Casts data:', data);
     return data;
@@ -53,7 +56,7 @@ export const getCasts = async id => {
 export const getReviews = async id => {
   try {
     const { data } = await axios.get(
-      `movie/${id}/reviews?api_key=${apiKey}&language=en-US`
+      `movie/${id}/reviews?language=en-US`
     );
     console.log('Reviews data:', data);
     return data;
