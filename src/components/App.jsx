@@ -1,7 +1,7 @@
-// App.jsx
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './Header/Header';
+
 
 const Home = lazy(() => import('../Pages/Home/Home'));
 const Movies = lazy(() => import('../Pages/Movies/Movies'));

@@ -1,23 +1,27 @@
-// import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom'; // Импорт Outlet
 import {
   HeaderDiv,
   HeaderItem,
   HeaderList,
   HeaderNavLink,
 } from './HeaderStyled';
+
 const Header = () => {
   return (
     <>
       <HeaderDiv>
         <HeaderList>
           <HeaderItem>
-            <HeaderNavLink to={'/'}>HOME</HeaderNavLink>
+            <HeaderNavLink to="/">HOME</HeaderNavLink>
           </HeaderItem>
-          <HeaderList>
-            <HeaderNavLink to={'/movies'}>MOVIES</HeaderNavLink>
-          </HeaderList>
+          <HeaderItem>
+            <HeaderNavLink to="/movies">MOVIES</HeaderNavLink>
+          </HeaderItem>
         </HeaderList>
       </HeaderDiv>
+      {/* Outlet для рендеру вкладенних маршрутів */}
+      <Outlet />
     </>
   );
 };
