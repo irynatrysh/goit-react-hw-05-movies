@@ -2,7 +2,7 @@ import { searchFilm } from 'Api/Api';
 import { FilmList } from 'components/FilmList/FilmList';
 import { Loader } from 'components/Loader/Loader';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { useState, useEffect, useRef } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   FilmListContainer,

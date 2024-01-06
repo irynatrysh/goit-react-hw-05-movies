@@ -36,7 +36,7 @@ export const SearchButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #6f339b;
+    background-color: #455899;
   }
   &:active {
     background-color: #1e0034;
@@ -46,7 +46,7 @@ export const SearchButton = styled.button`
 export const SearchInput = styled.input`
   padding: 15px;
   font-size: 16px;
-  border: 2px solid indigo;
+  border: 2px solid #455899;
   border-radius: 5px;
   width: 300px;
   text-align: center;
@@ -54,12 +54,12 @@ export const SearchInput = styled.input`
   color: #273563;
 
   &::placeholder {
-    color: #6f339b;
+    color: #273563;
     opacity: 0.7;
   }
 
   &:focus {
-    border-color: #6f339b;
+    border-color: #455899;
   }
 `;
 

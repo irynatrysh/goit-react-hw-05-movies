@@ -20,7 +20,7 @@ import { Loader } from 'components/Loader/Loader';
 import { NotResultsText } from 'components/Reviews/ReviewsStyled';
 
 export const MovieDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
@@ -30,7 +30,8 @@ export const MovieDetails = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const movieDetails = await getFilm(id);
+        console.log('Params:', params); // Додайте цей рядок для перевірки
+        const movieDetails = await getFilm(params.movieId); // Оновіть тут
         setMovie(movieDetails);
       } catch (error) {
         console.error('Error fetching movie details:', error);
@@ -40,7 +41,7 @@ export const MovieDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [id]);
+  }, [params.movieId]);
 
   if (!movie) {
     return (
@@ -50,6 +51,7 @@ export const MovieDetails = () => {
       </LoaderDiv>
     );
   }
+
   return (
     <>
       <MainContainer>
@@ -80,7 +82,6 @@ export const MovieDetails = () => {
 
               <li>
                 <DetailTitle>Genres</DetailTitle>
-
                 <GenresList>
                   {movie.genres.map(({ id, name }) => {
                     return <DetailText key={id}>{name} /</DetailText>;
@@ -91,14 +92,10 @@ export const MovieDetails = () => {
                 <div>
                   <CastListStyled>
                     <li>
-                      <ListCastRe to={`/movies/${id}/cast`}>Cast</ListCastRe>
+                      <ListCastRe to={`/movies/${params.movieId}/cast`}>Cast</ListCastRe> {/* Оновіть тут */}
                     </li>
                     <li>
-                      {
-                        <ListCastRe to={`/movies/${id}/reviews`}>
-                          Reviews
-                        </ListCastRe>
-                      }
+                      <ListCastRe to={`/movies/${params.movieId}/reviews`}>Reviews</ListCastRe> {/* Оновіть тут */}
                     </li>
                   </CastListStyled>
                 </div>

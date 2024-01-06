@@ -11,6 +11,7 @@ import {
   ActorName,
   Character,
 } from './CastStyled';
+
 import { Maindiv, NotResultsText } from 'components/Reviews/ReviewsStyled';
 import { Loader } from 'components/Loader/Loader';
 

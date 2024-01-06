@@ -9,14 +9,13 @@ export const MainContainer = styled('div')`
 export const BtnBack = styled('button')`
   position: absolute;
   position: fixed;
-  padding: 10px;
   margin-left: 25px;
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.5);
-  border: 5px solid indigo;
+  border: 3px solid #273563;
   &:hover {
     background-color: #b3d3ea;
     color: #2c5777;
