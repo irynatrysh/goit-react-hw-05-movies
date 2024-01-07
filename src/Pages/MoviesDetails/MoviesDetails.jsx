@@ -19,7 +19,7 @@ import {
 import { Loader } from 'components/Loader/Loader';
 import { NotResultsText } from 'components/Reviews/ReviewsStyled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const params = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,8 +30,8 @@ export const MovieDetails = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        console.log('Params:', params); // Додайте цей рядок для перевірки
-        const movieDetails = await getFilm(params.movieId); // Оновіть тут
+        console.log('Params:', params);
+        const movieDetails = await getFilm(params.movieId);
         setMovie(movieDetails);
       } catch (error) {
         console.error('Error fetching movie details:', error);
@@ -41,7 +41,7 @@ export const MovieDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [params.movieId]);
+  }, [params.movieId, params]);
 
   if (!movie) {
     return (
@@ -79,7 +79,6 @@ export const MovieDetails = () => {
                 <DetailTitle>Overview</DetailTitle>{' '}
                 <DetailText>{movie.overview}</DetailText>
               </li>
-
               <li>
                 <DetailTitle>Genres</DetailTitle>
                 <GenresList>
@@ -92,10 +91,10 @@ export const MovieDetails = () => {
                 <div>
                   <CastListStyled>
                     <li>
-                      <ListCastRe to={`/movies/${params.movieId}/cast`}>Cast</ListCastRe> {/* Оновіть тут */}
+                      <ListCastRe to={`/movies/${params.movieId}/cast`}>Cast</ListCastRe>
                     </li>
                     <li>
-                      <ListCastRe to={`/movies/${params.movieId}/reviews`}>Reviews</ListCastRe> {/* Оновіть тут */}
+                      <ListCastRe to={`/movies/${params.movieId}/reviews`}>Reviews</ListCastRe>
                     </li>
                   </CastListStyled>
                 </div>
