@@ -90,13 +90,17 @@ const MovieDetails = () => {
               <li>
                 <div>
                   <CastListStyled>
-                    <li>
-                      <ListCastRe to={`/movies/${params.movieId}/cast`}>Cast</ListCastRe>
-                    </li>
-                    <li>
-                      <ListCastRe to={`/movies/${params.movieId}/reviews`}>Reviews</ListCastRe>
-                    </li>
-                  </CastListStyled>
+  <li>
+    <ListCastRe to={`/movies/${params.movieId}/cast`} movieId={params.movieId}>
+      Cast
+    </ListCastRe>
+  </li>
+  <li>
+    <ListCastRe to={`/movies/${params.movieId}/reviews`} movieId={params.movieId}>
+      Reviews
+    </ListCastRe>
+  </li>
+</CastListStyled>
                 </div>
               </li>
             </DetailContainer>

@@ -15,8 +15,8 @@ import {
 import { Maindiv, NotResultsText } from 'components/Reviews/ReviewsStyled';
 import { Loader } from 'components/Loader/Loader';
 
-export const Cast = () => {
-  const { id } = useParams();
+const Cast = () => {
+  const { movieId } = useParams();
   const [actors, setActors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +24,7 @@ export const Cast = () => {
     const fetchCasts = async () => {
       try {
         setIsLoading(true);
-        const getActors = await getCasts(id);
+        const getActors = await getCasts(movieId);
         setActors(getActors);
       } catch (error) {
         console.error('Error fetching casts', error);
@@ -34,7 +34,8 @@ export const Cast = () => {
     };
 
     fetchCasts();
-  }, [id]);
+  }, [movieId]);
+
   if (isLoading) {
     return (
       <Maindiv>
@@ -43,6 +44,7 @@ export const Cast = () => {
       </Maindiv>
     );
   }
+
   if (!actors || !actors.cast || actors.cast.length === 0) {
     return (
       <Maindiv>
@@ -54,8 +56,10 @@ export const Cast = () => {
       </Maindiv>
     );
   }
+
   const unknownImg =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/694px-Unknown_person.jpg';
+
   return (
     <>
       <CastContainer>
@@ -87,3 +91,5 @@ export const Cast = () => {
     </>
   );
 };
+
+export default Cast;

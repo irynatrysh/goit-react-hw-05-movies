@@ -1,12 +1,10 @@
-
 import { getReviews } from 'Api/Api';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Maindiv, NotResultsText, ReList, ReText } from './ReviewsStyled';
 import { Loader } from 'components/Loader/Loader';
 
-export const Review = () => {
-  const { id } = useParams();
+const Review = (props) => {
+  const { movieId } = props; 
   const [review, setReview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,21 +12,23 @@ export const Review = () => {
     const fetchReviews = async () => {
       try {
         setIsLoading(true);
-        const getRevs = await getReviews(id);
+        const getRevs = await getReviews(movieId);
         setReview(getRevs);
       } catch (error) {
-        console.error('Error fetching casts', error);
+        console.error('Error fetching reviews', error);
       } finally {
         setIsLoading(false);
       }
     };
+
     fetchReviews();
-  }, [id]);
+  }, [movieId]);
+
   if (!review) {
     return (
       <Maindiv>
         {isLoading && <Loader />}
-        <NotResultsText>We are loading a reviews for this movie</NotResultsText>
+        <NotResultsText>We are loading reviews for this movie</NotResultsText>
       </Maindiv>
     );
   }
@@ -37,9 +37,7 @@ export const Review = () => {
     return (
       <Maindiv>
         {isLoading && <Loader />}
-        <NotResultsText>
-          We don't have any reviews for this movie
-        </NotResultsText>
+        <NotResultsText>We don't have any reviews for this movie</NotResultsText>
       </Maindiv>
     );
   }
@@ -59,3 +57,5 @@ export const Review = () => {
     </>
   );
 };
+
+export default Review;
