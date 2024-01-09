@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { getFilm } from 'Api/Api';
 import {
   BtnBack,
@@ -23,9 +23,11 @@ const MovieDetails = () => {
   const params = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
+  // eslint-disable-next-line
+const location = useLocation();
+  const navigate = useNavigate();
 
-  const backLink = location.state?.from ?? '/';
+  // Видалено невикористану змінну backLink
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -60,11 +62,9 @@ const MovieDetails = () => {
             <Loader />
           </LoaderDiv>
         )}
-        <Link to={backLink} state={location}>
-          <BtnBack type="button">
-            <IconBack size="40" />
-          </BtnBack>
-        </Link>
+        <BtnBack type="button" onClick={() => navigate(-1)}>
+          <IconBack size="40" />
+        </BtnBack>
         <Container>
           <Poster
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -89,7 +89,7 @@ const MovieDetails = () => {
               </li>
               <li>
                 <div>
-                  <CastListStyled>
+  <CastListStyled>
   <li>
     <ListCastRe to={`/movies/${params.movieId}/cast`} movieId={params.movieId}>
       Cast
