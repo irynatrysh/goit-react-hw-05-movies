@@ -24,7 +24,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   // eslint-disable-next-line
-const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
 
   // Видалено невикористану змінну backLink
@@ -45,6 +45,11 @@ const location = useLocation();
     fetchMovieDetails();
   }, [params.movieId, params]);
 
+  const handleGoBack = () => {
+    const from = location.state?.from || '/trending/all/day';
+    navigate(from);
+  };
+
   if (!movie) {
     return (
       <LoaderDiv>
@@ -62,7 +67,7 @@ const location = useLocation();
             <Loader />
           </LoaderDiv>
         )}
-        <BtnBack type="button" onClick={() => navigate(-1)}>
+         <BtnBack type="button" onClick={handleGoBack}>
           <IconBack size="40" />
         </BtnBack>
         <Container>
