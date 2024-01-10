@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { getFilm } from 'Api/Api';
 import {
@@ -16,6 +16,7 @@ import {
   MainContainer,
   Poster,
 } from './MoviesDetailsStyled';
+
 import { Loader } from 'components/Loader/Loader';
 import { NotResultsText } from 'components/Reviews/ReviewsStyled';
 
@@ -23,11 +24,11 @@ const MovieDetails = () => {
   const params = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line
   const location = useLocation();
   const navigate = useNavigate();
-
-  // Видалено невикористану змінну backLink
+  const fromRef = useRef('/'); // початкове значення - '/'
+  
+  console.log(location);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -45,9 +46,15 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [params.movieId, params]);
 
+  useEffect(() => {
+    // Зберегти значення location.state.from при кожному оновленні location
+    if (location.state?.from) {
+      fromRef.current = location.state.from;
+    }
+  }, [location]);
+
   const handleGoBack = () => {
-    const from = location.state?.from || '/trending/all/day';
-    navigate(from);
+    navigate(fromRef.current);
   };
 
   if (!movie) {
@@ -67,7 +74,7 @@ const MovieDetails = () => {
             <Loader />
           </LoaderDiv>
         )}
-         <BtnBack type="button" onClick={handleGoBack}>
+        <BtnBack type="button" onClick={handleGoBack}>
           <IconBack size="40" />
         </BtnBack>
         <Container>
@@ -94,24 +101,23 @@ const MovieDetails = () => {
               </li>
               <li>
                 <div>
-  <CastListStyled>
-  <li>
-    <ListCastRe to={`/movies/${params.movieId}/cast`} movieId={params.movieId}>
-      Cast
-    </ListCastRe>
-  </li>
-  <li>
-    <ListCastRe to={`/movies/${params.movieId}/reviews`} movieId={params.movieId}>
-      Reviews
-    </ListCastRe>
-  </li>
-</CastListStyled>
+                  <CastListStyled>
+                    <li>
+                      <ListCastRe to={`/movies/${params.movieId}/cast`}>
+                        Cast
+                      </ListCastRe>
+                    </li>
+                    <li>
+                      <ListCastRe to={`/movies/${params.movieId}/reviews`}>
+                        Reviews
+                      </ListCastRe>
+                    </li>
+                  </CastListStyled>
                 </div>
               </li>
             </DetailContainer>
           </ul>
         </Container>
-
         <Outlet />
       </MainContainer>
     </>
